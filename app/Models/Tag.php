@@ -11,7 +11,7 @@ class Tag extends Model
 
     // 保存を許可するカラム
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     // Contactとのリレーション（多対多）
