@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Http\Requests\IndexContactRequest;
-use Illuminate\Support\Facades\DB;
+
 
 class AdminController extends Controller
 {
@@ -19,10 +20,11 @@ class AdminController extends Controller
             ->dateSearch($request->date)
             ->paginate(7);
 
-        // 検索フォームのセレクトボックス用にカテゴリー一覧も取得
+        // 検索フォームの選択肢を取得
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.index', compact('contacts', 'categories'));
+        return view('admin.index', compact('contacts', 'categories', 'tags'));
     }
 
     public function show(Contact $contact)
