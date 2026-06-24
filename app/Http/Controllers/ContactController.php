@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category; //追加
+use App\Models\Category; // 追加
 use App\Models\Tag; // 追加
+use App\Models\Contact; // 追加
 use App\Http\Requests\StoreContactRequest; // 追加
 
 class ContactController extends Controller
@@ -26,10 +27,31 @@ class ContactController extends Controller
         $category = Category::find($validated['category_id']);
 
         $tags = collect();
-        if (!empty($contact['tag_ids'])) {
+        if (!empty($validated['tag_ids'])) {
             $tags = Tag::find($validated['tag_ids']);
         }
 
         return view('contact.confirm', compact('validated', 'category', 'tags'));
+    }
+
+    public function store(StoreContactRequest $request)
+    {
+        $validated = $request->validated();
+
+        // contactsテーブルにデータを保存
+        $contact = Contact::create($validated);
+
+        // 選択されたタグがあれば、contact_tagテーブルに紐づけ情報を保存
+        if (!empty($validated['tag_ids'])) {
+            $contact->tags()->attach($validated['tag_ids']);
+        }
+
+        // サンクスページへリダイレクト
+        return redirect('/thanks');
+    }
+
+    public function thanks()
+    {
+        return view('contact.thanks');
     }
 }
