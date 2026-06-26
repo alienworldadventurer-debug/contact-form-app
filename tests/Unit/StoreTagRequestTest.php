@@ -60,6 +60,7 @@ class StoreTagRequestTest extends TestCase
     {
         $request = new StoreTagRequest();
         $validator = Validator::make(['name' => str_repeat('あ', 51)], $request->rules());
+
         $this->assertFalse($validator->passes());
     }
 }
