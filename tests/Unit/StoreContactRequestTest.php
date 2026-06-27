@@ -19,8 +19,8 @@ class StoreContactRequestTest extends TestCase
      */
     public function test_store_contact_request_passes(): void
     {
-        Category::create(['content' => 'テストカテゴリ']);
-        Tag::create(['name' => 'テストタグ']);
+        $category = Category::create(['content' => 'テストカテゴリ']);
+        $tag = Tag::create(['name' => 'テストタグ']);
 
         $request = new StoreContactRequest();
 
@@ -33,9 +33,9 @@ class StoreContactRequestTest extends TestCase
             'tel' => '09012345678', // 10~11桁の数字のみ
             'address' => '東京都渋谷区',
             'building' => 'テストビル',
-            'category_id' => 1,
+            'category_id' => $category->id,
             'detail' => 'テストのお問い合わせ内容です。',
-            'tag_ids' => [1],
+            'tag_ids' => [$tag->id],
         ], $request->rules());
 
 
