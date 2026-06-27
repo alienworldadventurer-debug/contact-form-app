@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
-use App\Models\Contact;
 use App\Models\Category;
-
+use App\Models\Contact;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ExportContactTest extends TestCase
 {
@@ -49,7 +48,6 @@ class ExportContactTest extends TestCase
         $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
         $response->assertDownload('contacts.csv');
     }
-
 
     /**
      * 異常系：不正な性別を拒否する

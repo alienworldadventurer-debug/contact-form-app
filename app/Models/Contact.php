@@ -38,41 +38,44 @@ class Contact extends Model
     // キーワード検索スコープ
     public function scopeKeywordSearch($query, $keyword)
     {
-        if (!empty($keyword)) {
+        if (! empty($keyword)) {
             $searchWord = str_replace([' ', '　'], '', $keyword);
             $query->where(function ($q) use ($searchWord, $keyword) {
-                $q->where(DB::raw('CONCAT(first_name,last_name)'), 'like', '%' . $searchWord . '%')
-                    ->orWhere('email', 'like', '%' . $keyword . '%');
+                $q->where(DB::raw('CONCAT(first_name,last_name)'), 'like', '%'.$searchWord.'%')
+                    ->orWhere('email', 'like', '%'.$keyword.'%');
             });
         }
+
         return $query;
     }
-
 
     // 性別検索スコープ
     public function scopeGenderSearch($query, $gender)
     {
-        if (!empty($gender) && $gender != 0) {
+        if (! empty($gender) && $gender != 0) {
             $query->where('gender', $gender);
         }
+
         return $query;
     }
 
     //　カテゴリ検索スコープ
     public function scopeCategorySearch($query, $categoryId)
     {
-        if (!empty($categoryId)) {
+        if (! empty($categoryId)) {
             $query->where('category_id', $categoryId);
         }
+
         return $query;
     }
 
     // 日付検索スコープ
     public function scopeDateSearch($query, $date)
     {
-        if (!empty($date)) {
+        if (! empty($date)) {
             $query->whereDate('created_at', $date);
         }
+
         return $query;
     }
 }

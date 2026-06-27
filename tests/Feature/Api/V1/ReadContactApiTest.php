@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Api\V1;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\Contact;
 use App\Models\Category;
-use function PHPUnit\Framework\assertJson;
+use App\Models\Contact;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ReadContactApiTest extends TestCase
 {
@@ -35,7 +34,7 @@ class ReadContactApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data',
-                'meta' => ['current_page', 'last_page', 'per_page', 'total']
+                'meta' => ['current_page', 'last_page', 'per_page', 'total'],
             ]);
     }
 
@@ -77,7 +76,7 @@ class ReadContactApiTest extends TestCase
      */
     public function test_returns_404_for_non_existent_contact(): void
     {
-        $response = $this->getJson("/api/v1/contacts/999");
+        $response = $this->getJson('/api/v1/contacts/999');
 
         $response->assertStatus(404);
     }

@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
-use App\Models\Contact;
 use App\Models\Category;
-
+use App\Models\Contact;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AdminContactTest extends TestCase
 {
@@ -46,7 +45,7 @@ class AdminContactTest extends TestCase
         }
 
         // 検索条件（山田、男性、カテゴリ1）を指定してアクセス
-        $response = $this->actingAs($user)->get('/admin?keyword=山田&gender=1&category_id=' . $category1->id);
+        $response = $this->actingAs($user)->get('/admin?keyword=山田&gender=1&category_id='.$category1->id);
 
         $response->assertStatus(200);
         $response->assertSee('山田');

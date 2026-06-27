@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreContactRequest extends FormRequest
+class UpdateContactRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return true; // 認証不要のAPIのため、trueにします
     }
 
     public function rules(): array

@@ -4,7 +4,7 @@ return [
     'required' => ':attributeを入力してください',
     'email' => ':attributeはメール形式で入力してください。',
     'min' => [
-        'string' => ':attributeは :min文字以上で入力してください'
+        'string' => ':attributeは :min文字以上で入力してください',
     ],
     'confirmed' => 'パスワードと一致しません',
     'attributes' => [

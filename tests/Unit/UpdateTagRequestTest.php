@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Routing\Route;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Validator;
+use Tests\TestCase;
 
 class UpdateTagRequestTest extends TestCase
 {
@@ -18,7 +18,7 @@ class UpdateTagRequestTest extends TestCase
      */
     private function setupRequestWithTag($tag)
     {
-        $request = new UpdateTagRequest();
+        $request = new UpdateTagRequest;
 
         $route = new Route('PUT', '/admin/tags/{tag}', []);
         $route->bind($request); // ルートをバインド状態にする
@@ -34,7 +34,6 @@ class UpdateTagRequestTest extends TestCase
     /**
      * 正常系：自身の名前ををのまま維持して更新できるか
      */
-
     public function test_update_tag_request_passes_with_same_name(): void
     {
         // 事前にタグを作成
@@ -53,7 +52,6 @@ class UpdateTagRequestTest extends TestCase
     /**
      * 異常系：他で既に使用されているタグ名への変更を弾くか
      */
-
     public function test_update_tag_request_fails_with_duplicate_name(): void
     {
         // 事前にタグを作成

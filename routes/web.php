@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TagController;
+use Illuminate\Support\Facades\Route;
 
 // お問い合わせ入力画面（トップページ）の表示
 Route::get('/', [ContactController::class, 'index']);
@@ -16,7 +16,6 @@ Route::post('/contacts', [ContactController::class, 'store']);
 
 // サンクスページの表示
 Route::get('/thanks', [ContactController::class, 'thanks']);
-
 
 Route::middleware('auth')->group(function () {
     // admin画面(管理画面一覧)の表示
