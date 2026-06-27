@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ContactPageTest extends TestCase
 {
@@ -38,7 +38,6 @@ class ContactPageTest extends TestCase
     /**
      * サンクスページ(/thanks)が正常に表示されるか
      */
-
     public function test_thanks_page_is_displayed(): void
     {
         $response = $this->get('/thanks');

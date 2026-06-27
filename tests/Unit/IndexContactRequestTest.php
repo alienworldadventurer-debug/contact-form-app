@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\IndexContactRequest;
 use App\Models\Category;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Validator;
+use Tests\TestCase;
 
 class IndexContactRequestTest extends TestCase
 {
@@ -19,7 +19,7 @@ class IndexContactRequestTest extends TestCase
     {
         Category::create(['content' => 'テストカテゴリ']);
 
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         // 検索条件の正常なデータ
         $validator = Validator::make([
@@ -37,7 +37,7 @@ class IndexContactRequestTest extends TestCase
      */
     public function test_index_contact_request_fails_with_invalid_gender()
     {
-        $request = new IndexContactRequest();
+        $request = new IndexContactRequest;
 
         // 存在しない性別（例：4）
         $validator = Validator::make([

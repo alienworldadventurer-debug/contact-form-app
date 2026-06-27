@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Tag;
-use App\Models\Contact;
-use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\ExportContactRequest;
-use Symfony\Component\HttpFoundation\StreamedJsonResponse;
+use App\Http\Requests\StoreContactRequest;
+use App\Models\Category;
+use App\Models\Contact;
+use App\Models\Tag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ContactController extends Controller
@@ -29,7 +28,7 @@ class ContactController extends Controller
         $category = Category::find($validated['category_id']);
 
         $tags = collect();
-        if (!empty($validated['tag_ids'])) {
+        if (! empty($validated['tag_ids'])) {
             $tags = Tag::find($validated['tag_ids']);
         }
 
@@ -44,7 +43,7 @@ class ContactController extends Controller
         $contact = Contact::create($validated);
 
         // 選択されたタグがあれば、contact_tagテーブルに紐づけ情報を保存
-        if (!empty($validated['tag_ids'])) {
+        if (! empty($validated['tag_ids'])) {
             $contact->tags()->attach($validated['tag_ids']);
         }
 
@@ -106,7 +105,7 @@ class ContactController extends Controller
                 '建物',
                 'カテゴリ',
                 '内容',
-                '作成日時'
+                '作成日時',
             ]);
 
             $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
@@ -115,7 +114,7 @@ class ContactController extends Controller
             foreach ($contacts as $contact) {
                 fputcsv($handle, [
                     $contact->id,
-                    $contact->first_name . ' ' . $contact->last_name, //　氏名を結合
+                    $contact->first_name.' '.$contact->last_name, //　氏名を結合
                     $genderLabels[$contact->gender] ?? '',
                     $contact->email,
                     $contact->tel,

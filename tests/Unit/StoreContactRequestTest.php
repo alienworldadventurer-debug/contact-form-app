@@ -2,13 +2,12 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreContactRequest;
 use App\Models\Category;
 use App\Models\Tag;
-
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Validator;
+use Tests\TestCase;
 
 class StoreContactRequestTest extends TestCase
 {
@@ -22,7 +21,7 @@ class StoreContactRequestTest extends TestCase
         $category = Category::create(['content' => 'テストカテゴリ']);
         $tag = Tag::create(['name' => 'テストタグ']);
 
-        $request = new StoreContactRequest();
+        $request = new StoreContactRequest;
 
         // 正常なデータ
         $validator = Validator::make([
@@ -38,7 +37,6 @@ class StoreContactRequestTest extends TestCase
             'tag_ids' => [$tag->id],
         ], $request->rules());
 
-
         $this->assertTrue($validator->passes());
     }
 
@@ -47,7 +45,7 @@ class StoreContactRequestTest extends TestCase
      */
     public function test_store_contact_request_fails_with_invalid_tel()
     {
-        $request = new StoreContactRequest();
+        $request = new StoreContactRequest;
 
         $validator = Validator::make([
             'first_name' => '山田',
@@ -60,7 +58,6 @@ class StoreContactRequestTest extends TestCase
             'detail' => 'テスト内容',
             'tag_ids' => [2],
         ], $request->rules());
-
 
         $this->assertFalse($validator->passes());
     }

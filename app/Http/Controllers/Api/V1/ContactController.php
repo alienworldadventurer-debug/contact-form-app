@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Contact;
 use App\Http\Requests\Api\V1\IndexContactRequest;
+use App\Http\Requests\Api\V1\StoreContactRequest;
+use App\Http\Requests\Api\V1\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
@@ -56,5 +58,39 @@ class ContactController extends Controller
 
         // API Resourceを使ってJSON形式に変換
         return new ContactResource($contact);
+    }
+
+    public function store(StoreContactRequest $request)
+    {
+        $contact = Contact::create($request->except('tag_ids'));
+
+        if ($request->has('tag_ids')) {
+            $contact->tags()->attach($request->tag_ids);
+        }
+
+        $contact->load(['category', 'tags']);
+
+        return (new ContactResource($contact))
+            ->response()
+            ->setStatusCode(201);
+    }
+
+    public function update(UpdateContactRequest $request, Contact $contact)
+    {
+        $contact->update($request->except('tag_ids'));
+
+        $tagIds = $request->input('tag_ids', []);
+        $contact->tags()->sync($tagIds);
+
+        $contact->load(['category', 'tags']);
+
+        return new ContactResource($contact);
+    }
+
+    public function destroy(Contact $contact)
+    {
+        $contact->delete();
+
+        return response()->json(null, 204);
     }
 }

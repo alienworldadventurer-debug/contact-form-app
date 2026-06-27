@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreTagRequest;
 use App\Models\Tag;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Validator;
+use Tests\TestCase;
 
 class StoreTagRequestTest extends TestCase
 {
@@ -17,7 +17,7 @@ class StoreTagRequestTest extends TestCase
      */
     public function test_store_tag_request_passes(): void
     {
-        $request = new StoreTagRequest();
+        $request = new StoreTagRequest;
 
         $validator = Validator::make([
             'name' => '新規タグ',
@@ -34,7 +34,7 @@ class StoreTagRequestTest extends TestCase
         // 事前にタグを作成しておく
         Tag::create(['name' => '既存タグ']);
 
-        $request = new StoreTagRequest();
+        $request = new StoreTagRequest;
 
         $validator = Validator::make([
             'name' => '既存タグ', // 重複する名前を渡す
@@ -48,7 +48,7 @@ class StoreTagRequestTest extends TestCase
      */
     public function test_store_tag_request_fails_with_empty_name(): void
     {
-        $request = new StoreTagRequest();
+        $request = new StoreTagRequest;
         $validator = Validator::make(['name' => ''], $request->rules());
         $this->assertFalse($validator->passes());
     }
@@ -58,7 +58,7 @@ class StoreTagRequestTest extends TestCase
      */
     public function test_store_tag_request_fails_with_long_name(): void
     {
-        $request = new StoreTagRequest();
+        $request = new StoreTagRequest;
         $validator = Validator::make(['name' => str_repeat('あ', 51)], $request->rules());
 
         $this->assertFalse($validator->passes());
