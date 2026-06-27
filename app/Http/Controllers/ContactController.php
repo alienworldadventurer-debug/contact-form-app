@@ -114,7 +114,7 @@ class ContactController extends Controller
             foreach ($contacts as $contact) {
                 fputcsv($handle, [
                     $contact->id,
-                    $contact->first_name . ' ' . $contact->last_name, //　氏名を結合
+                    $contact->first_name.' '.$contact->last_name, //　氏名を結合
                     $genderLabels[$contact->gender] ?? '',
                     $contact->email,
                     $contact->tel,
