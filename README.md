@@ -67,8 +67,8 @@ erDiagram
 
 1. リポジトリのクローン
    \`\`\`bash
-   git clone [本リポジトリのURL]
-   cd [プロジェクトディレクトリ名]
+   git clone https://github.com/alienworldadventurer-debug/contact-form-app.git
+   cd contact-form-app
    \`\`\`
 
 2. 環境変数の設定
