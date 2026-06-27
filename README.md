@@ -66,27 +66,27 @@ erDiagram
 ## 環境構築手順
 
 1. リポジトリのクローン
-   \`\`\`bash  
+   ```bash
    git clone https://github.com/alienworldadventurer-debug/contact-form-app.git  
    cd contact-form-app
-   \`\`\`
+   ```
 
 2. 環境変数の設定
-   \`\`\`bash  
+   ```bash
    cp .env.example .env  
-   \`\`\`
+   ```
    ※作成された `.env` ファイルを開き、データベース接続情報を以下のように書き換えてください。
-   \`\`\`env
+   ```env
    DB_CONNECTION=mysql
    DB_HOST=mysql
    DB_PORT=3306
    DB_DATABASE=laravel
    DB_USERNAME=sail
    DB_PASSWORD=password
-   \`\`\`
+   ```
 
 3. コンテナのビルドと起動
-   \`\`\`bash
+   ```bash
    docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
@@ -95,20 +95,20 @@ erDiagram
     laravelsail/php82-composer:latest \
     composer install --ignore-platform-reqs
 
-./vendor/bin/sail up -d
-\`\`\`
+   ./vendor/bin/sail up -d
+   ```
 
 4. アプリケーションキーの生成とマイグレーション（初期データ投入）
-   \`\`\`bash
+   ```bash
    sail artisan key:generate
    sail artisan migrate:fresh --seed
-   \`\`\`
+   ```
 
 5. フロントエンドのセットアップ
-   \`\`\`bash
+   ```bash
    sail npm install
    sail npm run dev
-   \`\`\`
+   ```
 
 ## 使用技術
 
@@ -138,11 +138,3 @@ erDiagram
 ## 作成者
 
 谷口 俊明
-
-```
-
-```
-
-```
-
-```
