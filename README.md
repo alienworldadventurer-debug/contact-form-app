@@ -66,49 +66,67 @@ erDiagram
 ## 環境構築手順
 
 1. リポジトリのクローン
-   ```bash
-   git clone https://github.com/alienworldadventurer-debug/contact-form-app.git  
-   cd contact-form-app
-   ```
+
+    ```bash
+    git clone https://github.com/alienworldadventurer-debug/contact-form-app.git
+    cd contact-form-app
+    ```
 
 2. 環境変数の設定
-   ```bash
-   cp .env.example .env  
-   ```
-   ※作成された `.env` ファイルを開き、データベース接続情報を以下のように書き換えてください。
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=mysql
-   DB_PORT=3306
-   DB_DATABASE=laravel
-   DB_USERNAME=sail
-   DB_PASSWORD=password
-   ```
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    ※作成された `.env` ファイルを開き、データベース接続情報を以下のように書き換えてください。
+
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=mysql
+    DB_PORT=3306
+    DB_DATABASE=laravel
+    DB_USERNAME=sail
+    DB_PASSWORD=password
+    ```
 
 3. コンテナのビルドと起動
-   ```bash
-   docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v "$(pwd):/var/www/html" \
-    -w /var/www/html \
-    -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
-    laravelsail/php82-composer:latest \
-    composer install --ignore-platform-reqs
 
-   ./vendor/bin/sail up -d
-   ```
+    ```bash
+    docker run --rm \
+     -u "$(id -u):$(id -g)" \
+     -v "$(pwd):/var/www/html" \
+     -w /var/www/html \
+     -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+     laravelsail/php82-composer:latest \
+     composer install --ignore-platform-reqs
+
+    ./vendor/bin/sail up -d
+    ```
 
 4. アプリケーションキーの生成とマイグレーション（初期データ投入）
-   ```bash
-   sail artisan key:generate
-   sail artisan migrate:fresh --seed
-   ```
+
+    ```bash
+    sail artisan key:generate
+    sail artisan migrate:fresh --seed
+    ```
 
 5. フロントエンドのセットアップ
-   ```bash
-   sail npm install
-   sail npm run dev
-   ```
+    ```bash
+    sail npm install
+    sail npm run dev
+    ```
+6. テストの実行方法
+   Dockerコンテナが起動している状態で、以下のコマンドを実行してください。
+
+    ```bash
+    # 全てのテストを実行
+
+    sail artisan test
+
+    # テストカバレッジを測定して実行
+
+    sail artisan test --coverage
+    ```
 
 ## 使用技術
 

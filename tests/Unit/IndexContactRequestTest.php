@@ -17,7 +17,8 @@ class IndexContactRequestTest extends TestCase
      */
     public function test_index_contact_request_passes()
     {
-        Category::create(['content' => 'テストカテゴリ']);
+        // 準備：データベースにカテゴリを1つ作成
+        $category = Category::factory()->create();
 
         $request = new IndexContactRequest;
 
@@ -25,7 +26,7 @@ class IndexContactRequestTest extends TestCase
         $validator = Validator::make([
             'keyword' => 'テスト',
             'gender' => 1, // 0,1,2,3　はOK
-            'category_id' => 1,
+            'category_id' => $category->id,
             'date' => '2026-01-01',
         ], $request->rules());
 

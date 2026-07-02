@@ -15,7 +15,7 @@ class TagSeeder extends Seeder
         $tags = [
             '質問',
             '要望',
-            '不合格報告',
+            '不具合報告',
             'ご意見',
             'その他',
         ];
